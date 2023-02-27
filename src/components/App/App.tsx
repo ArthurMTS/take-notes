@@ -1,7 +1,5 @@
 import React from "react";
 
-export const App: React.FC = () => {
-  return (
-    <h1>Hello, world</h1>
-  );
-};
+import { Home } from "@/views/Home";
+
+export const App: React.FC = () => <Home />;

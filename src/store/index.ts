@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import projectReducer from './projectSlicer';
+import projectReducer from "./projectSlicer";
 
 export const store = configureStore({
   reducer: {

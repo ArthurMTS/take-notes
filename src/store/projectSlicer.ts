@@ -1,19 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import { NoteData } from '@/config/types';
-import { uniqueID } from '@/utils/generateId';
+import { NoteData } from "@/config/types";
+import { uniqueID } from "@/utils/generateId";
 
 const initialState = {
   nextId: 3,
   projects: [
-    { id: 0, title: 'Caixa de Entrada', tasks: [] as NoteData[], deletable: false },
-    { id: 1, title: 'Hoje', tasks: [] as NoteData[], deletable: false },
-    { id: 2, title: 'Essa Semana', tasks: [] as NoteData[], deletable: false },
+    { id: 0, title: "Caixa de Entrada", tasks: [] as NoteData[], deletable: false },
+    { id: 1, title: "Hoje", tasks: [] as NoteData[], deletable: false },
+    { id: 2, title: "Essa Semana", tasks: [] as NoteData[], deletable: false },
   ],
 }
 
 const projectSlicer = createSlice({
-  name: 'project',
+  name: "project",
   initialState,
   reducers: {
     addProject: (state, { payload }) => {
