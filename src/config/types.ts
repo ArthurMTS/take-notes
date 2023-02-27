@@ -13,6 +13,8 @@ export interface NoteData {
 }
 
 export interface ProjectData {
-	name: string;
+	id: number;
+	title: string;
 	notes: NoteData[];
+	deletable: boolean;
 }
