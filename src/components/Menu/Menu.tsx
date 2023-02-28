@@ -1,26 +1,68 @@
-import { RootState } from "@/store";
-import { useSelector } from "react-redux";
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-
-import { MenuBox, MenuList, MenuProject, MenuTitle } from "./Menu.styles";
+import { RootState } from "@/store";
+import { changeProject } from "@/store/projectSlicer";
+import { MenuBox, MenuList, MenuTitle } from "./Menu.styles";
+import { MenuItem } from "@/components/MenuItem";
+import InboxIcon from "@/assets/icons/inbox.svg";
+import ClipboardIcon from "@/assets/icons/clipboard.svg";
+import ArchiveIcon from "@/assets/icons/archive.svg";
+import TargetIcon from "@/assets/icons/target.svg";
 
 export const Menu: React.FC = () => {
-  const projects = useSelector((state: RootState) => state.projects.projects);
+  const activeProject = useSelector((state: RootState) => state.projects.activeProject);
+  const [inbox, today, week, ...projects] = useSelector(
+    (state: RootState) => state.projects.projects,
+  );
+  const dispatch = useDispatch();
+
+  const onProjectListItemClick = (id: number) => {
+    dispatch(changeProject(id));
+  };
 
   return (
     <MenuBox>
       <MenuTitle>Projects</MenuTitle>
       <MenuList>
-        {
-          projects.map(project => 
-            <MenuProject
-              key={project.id}
-            >
-              {project.title}
-            </MenuProject>  
-          )
-        }
+        <MenuItem
+          key={inbox.id}
+          active={activeProject === inbox.id}
+          icon={InboxIcon}
+          title={inbox.title}
+          quantity={inbox.tasks.length}
+          canBeDeleted={inbox.deletable}
+          onClick={() => onProjectListItemClick(inbox.id)}
+        />
+        <MenuItem
+          key={today.id}
+          active={activeProject === today.id}
+          icon={ClipboardIcon}
+          title={today.title}
+          quantity={today.tasks.length}
+          canBeDeleted={today.deletable}
+          onClick={() => onProjectListItemClick(today.id)}
+        />
+        <MenuItem
+          key={week.id}
+          active={activeProject === week.id}
+          icon={ArchiveIcon}
+          title={week.title}
+          quantity={week.tasks.length}
+          canBeDeleted={week.deletable}
+          onClick={() => onProjectListItemClick(week.id)}
+        />
+        {projects.map(project => (
+          <MenuItem
+            key={project.id}
+            active={activeProject === project.id}
+            icon={TargetIcon}
+            title={project.title}
+            quantity={project.tasks.length}
+            canBeDeleted={project.deletable}
+            onClick={() => onProjectListItemClick(project.id)}
+          />
+        ))}
       </MenuList>
     </MenuBox>
   );

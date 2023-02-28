@@ -19,20 +19,5 @@ export const MenuTitle = styled(Typography)({
 });
 
 export const MenuList = styled("ul")({
-  marginLeft: 20,
-});
-
-export const MenuProject = styled("li")({
-  fontSize: 18,
-  listStyle: "none",
-  color: "#E7E7E7",
-  padding: 5,
-  cursor: "pointer",
-  "&:last": {
-    marginBottom: 10,
-  },
-  "&:hover:before": {
-    content: '"🖊️ "',
-
-  },
+  margin: "0 10px 10px 20px",
 });

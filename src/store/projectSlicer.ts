@@ -5,6 +5,7 @@ import { uniqueID } from "@/utils/generateId";
 
 const initialState = {
   nextId: 3,
+  activeProject: 0,
   projects: [
     { id: 0, title: "Caixa de Entrada", tasks: [] as NoteData[], deletable: false },
     { id: 1, title: "Hoje", tasks: [] as NoteData[], deletable: false },
@@ -38,6 +39,9 @@ const projectSlicer = createSlice({
     },
     removeProject: (state, { payload }) => {
       state.projects = state.projects.filter(project => project.id !== payload);
+    },
+    changeProject: (state, { payload }) => {
+      state.activeProject = payload;
     },
     addTask: (state, { payload }) => {
       state.projects = state.projects.map(project => {
@@ -90,6 +94,7 @@ export const {
   addProject,
   updateProject,
   removeProject,
+  changeProject,
   addTask,
   updateTask,
   removeTask,
