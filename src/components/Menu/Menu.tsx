@@ -26,6 +26,7 @@ export const Menu: React.FC = () => {
       <MenuTitle>Projects</MenuTitle>
       <MenuList>
         <MenuItem
+          id={inbox.id}
           key={inbox.id}
           active={activeProject === inbox.id}
           icon={InboxIcon}
@@ -35,6 +36,7 @@ export const Menu: React.FC = () => {
           onClick={() => onProjectListItemClick(inbox.id)}
         />
         <MenuItem
+          id={today.id}
           key={today.id}
           active={activeProject === today.id}
           icon={ClipboardIcon}
@@ -44,6 +46,7 @@ export const Menu: React.FC = () => {
           onClick={() => onProjectListItemClick(today.id)}
         />
         <MenuItem
+          id={week.id}
           key={week.id}
           active={activeProject === week.id}
           icon={ArchiveIcon}
@@ -54,6 +57,7 @@ export const Menu: React.FC = () => {
         />
         {projects.map(project => (
           <MenuItem
+            id={project.id}
             key={project.id}
             active={activeProject === project.id}
             icon={TargetIcon}
