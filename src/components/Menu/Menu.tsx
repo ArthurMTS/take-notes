@@ -9,6 +9,7 @@ import InboxIcon from "@/assets/icons/inbox.svg";
 import ClipboardIcon from "@/assets/icons/clipboard.svg";
 import ArchiveIcon from "@/assets/icons/archive.svg";
 import TargetIcon from "@/assets/icons/target.svg";
+import { AddProject } from "../AddProject";
 
 export const Menu: React.FC = () => {
   const activeProject = useSelector((state: RootState) => state.projects.activeProject);
@@ -24,7 +25,7 @@ export const Menu: React.FC = () => {
   return (
     <MenuBox>
       <MenuTitle>Projects</MenuTitle>
-      <MenuList>
+      <MenuList className="nobar">
         <MenuItem
           id={inbox.id}
           key={inbox.id}
@@ -68,6 +69,7 @@ export const Menu: React.FC = () => {
           />
         ))}
       </MenuList>
+      <AddProject />
     </MenuBox>
   );
 };

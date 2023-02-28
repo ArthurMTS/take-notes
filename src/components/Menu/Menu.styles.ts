@@ -15,9 +15,11 @@ export const MenuTitle = styled(Typography)({
   fontSize: 18,
   fontWeight: 700,
   color: "#FFF",
-  margin: "10px 10px 0",
+  margin: "10px 0 10px 10px",
 });
 
 export const MenuList = styled("ul")({
   margin: "0 10px 10px 20px",
+  maxHeight: 346,
+  overflowY: "scroll",
 });
