@@ -14,6 +14,7 @@ import {
 import { RootState } from "@/store";
 import { updateProject, changeProject } from "@/store/projectSlicer";
 import { AddTask } from "@/components/AddTask";
+import { TaskCard } from "@/components/TaskCard";
 
 export const Main: React.FC = () => {
   const [update, setUpdate] = React.useState(false);
@@ -71,7 +72,17 @@ export const Main: React.FC = () => {
       )}
       <HorizontalLine />
       <MainTaskList>
-        {project?.tasks.map(task => <p>{task.title}</p>)}
+        {project?.tasks.map(task => 
+          <TaskCard
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            state={task.state}
+            startDate={task.startDate}
+            dueDate={task.dueDate}
+            tags={task.tags}
+          />
+        )}
       </MainTaskList>
       <AddTask projectID={project?.id || 0} />
     </MainBox>
