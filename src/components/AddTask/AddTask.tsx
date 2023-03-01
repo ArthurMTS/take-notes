@@ -75,16 +75,22 @@ export const AddTask: React.FC<AddTaskProps> = ({ projectID }) => {
     setTags(newList);
   };
   const clearForm = () => {
-
+    setOpen(false);
+    setTitle("");
+    setDescription("");
+    setStartDate(getDate());
+    setDueDate(undefined);
+    setTag("");
+    setTags([]);
   };
   const onCreateTaskButtonClick = () => {
     if (title === "") return;
     const newTask = {
       title,
-	    description,
-	    startDate,
-	    dueDate,
-	    tags,
+      description,
+      startDate,
+      dueDate,
+      tags,
     };
     dispatch(addTask({ projectID, task: newTask }));
     clearForm();
@@ -167,10 +173,7 @@ export const AddTask: React.FC<AddTaskProps> = ({ projectID }) => {
           </Button>
         </DateBox>
 
-        <Button
-          variant="contained"
-          onClick={onCreateTaskButtonClick}
-        >
+        <Button variant="contained" onClick={onCreateTaskButtonClick}>
           Criar Tarefa
         </Button>
       </TaskPopUp>

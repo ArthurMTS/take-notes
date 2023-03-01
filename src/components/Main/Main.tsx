@@ -47,8 +47,6 @@ export const Main: React.FC = () => {
     onClickAwayTitle();
   };
 
-  console.log(project?.tasks);
-
   return (
     <MainBox>
       {!update ? (
