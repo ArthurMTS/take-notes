@@ -8,7 +8,7 @@ export interface NoteData {
 	state: "novo" | "em andamento" | "pronto" | string;
 	tags?: {
 		id: number;
-		value: string;
+		text: string;
 	}[];
 }
 

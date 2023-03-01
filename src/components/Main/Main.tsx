@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { ClickAwayListener } from "@mui/material";
 
 import {
   HorizontalLine,
@@ -12,7 +13,7 @@ import {
 } from "./Main.styles";
 import { RootState } from "@/store";
 import { updateProject, changeProject } from "@/store/projectSlicer";
-import { ClickAwayListener } from "@mui/material";
+import { AddTask } from "@/components/AddTask";
 
 export const Main: React.FC = () => {
   const [update, setUpdate] = React.useState(false);
@@ -23,7 +24,7 @@ export const Main: React.FC = () => {
   });
   const [projectTitle, setProjectTitle] = React.useState(project?.title);
   const dispatch = useDispatch();
-  
+
   React.useEffect(() => {
     setProjectTitle(project?.title);
 
@@ -45,6 +46,8 @@ export const Main: React.FC = () => {
     dispatch(updateProject({ id: project?.id, title: projectTitle }));
     onClickAwayTitle();
   };
+
+  console.log(project?.tasks);
 
   return (
     <MainBox>
@@ -69,7 +72,10 @@ export const Main: React.FC = () => {
         </ClickAwayListener>
       )}
       <HorizontalLine />
-      <MainTaskList></MainTaskList>
+      <MainTaskList>
+        {project?.tasks.map(task => <p>{task.title}</p>)}
+      </MainTaskList>
+      <AddTask projectID={project?.id || 0} />
     </MainBox>
   );
 };

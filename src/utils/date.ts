@@ -2,7 +2,7 @@ export const getDate = (date: Date = new Date()) => {
   return date.toISOString().slice(0, 10);
 };
 
-export const whenIsSaturday = () => {
+const whenIsSaturday = () => {
   const today = new Date();
   return today.getDate() + (6 - today.getDay());
 }

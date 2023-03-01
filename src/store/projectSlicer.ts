@@ -52,7 +52,7 @@ const projectSlicer = createSlice({
             state: "novo",
             priority: "normal",
           };
-
+          console.log(newTask);
           project.tasks.push(newTask);
         }
 
