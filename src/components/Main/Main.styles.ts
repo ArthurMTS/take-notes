@@ -46,5 +46,9 @@ export const UpdateButton = styled(Button)({
 });
 
 export const MainTaskList = styled("ul")({
-  
+  width: "100%",
+  padding: 20,
+  display: "flex",
+  gap: 10,
+  flexWrap: "wrap",
 });

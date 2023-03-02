@@ -75,6 +75,7 @@ export const Main: React.FC = () => {
         {project?.tasks.map(task => 
           <TaskCard
             key={task.id}
+            projectID={project?.id}
             id={task.id}
             title={task.title}
             state={task.state}
