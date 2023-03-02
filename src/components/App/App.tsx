@@ -1,5 +1,5 @@
 import React from "react";
 
-import { Home } from "@/views/Home";
+import { Router } from "../Router";
 
-export const App: React.FC = () => <Home />;
+export const App: React.FC = () => <Router />;

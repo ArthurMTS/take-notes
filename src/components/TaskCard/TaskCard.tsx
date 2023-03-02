@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import {
   TaskBox,
@@ -39,14 +40,18 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   tags,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onRemoveTaskButtonClick = () => {
     if(confirm("Tem certeza que deseja remover essa tarefa?"))
       dispatch(removeTask({ projectID, taskID: id }));
   };
+  const onTaskCardClick = () => {
+    navigate(`/task/${id}`);
+  };
 
   return (
-    <TaskBox>
+    <TaskBox onClick={onTaskCardClick}>
       <div>
         <TaskTagsBox className="nobar">
           {tags?.map(tag => (

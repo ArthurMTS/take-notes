@@ -7,7 +7,7 @@ export const Header: React.FC = () => {
   return (
     <HeaderBox>
       <img src={FeatherIcon} alt="Feather Icon" />
-      <HeaderTitle>
+      <HeaderTitle to="/">
         Take Notes
       </HeaderTitle>
     </HeaderBox>

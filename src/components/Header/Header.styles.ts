@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
 
 export const HeaderBox = styled(Box)({
   display: "flex",
@@ -10,8 +10,15 @@ export const HeaderBox = styled(Box)({
   gap: 10,
 });
 
-export const HeaderTitle = styled(Typography)({
+export const HeaderTitle = styled(Link)({
+  fontFamily: "sans-serif",
   fontSize: 26,
   color: "rgb(226 232 240)",
   fontWeight: 700,
+  cursor: "pointer",
+  transition: "all .2s",
+  textDecoration: "none",
+  "&:hover": {
+    color: "#374ebf",
+  },
 });
