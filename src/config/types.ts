@@ -15,6 +15,6 @@ export interface NoteData {
 export interface ProjectData {
 	id: number;
 	title: string;
-	notes: NoteData[];
+	tasks: NoteData[];
 	deletable: boolean;
 }
