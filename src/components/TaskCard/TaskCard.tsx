@@ -42,7 +42,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onRemoveTaskButtonClick = () => {
+  const onRemoveTaskButtonClick = (event: React.MouseEvent<HTMLImageElement>) => {
+    event.stopPropagation();
     if(confirm("Tem certeza que deseja remover essa tarefa?"))
       dispatch(removeTask({ projectID, taskID: id }));
   };
