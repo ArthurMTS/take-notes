@@ -21,6 +21,13 @@ export const AddTaskButton = styled(Button)({
     width: 35,
     height: 35,
   },
+  "@media (max-width: 340px)": {
+    "& img": {
+      width: 25,
+      height: 25,
+    },
+    bottom: -10,
+  },
 });
 
 export const TaskPopUp = styled(Drawer)({
@@ -30,6 +37,26 @@ export const TaskPopUp = styled(Drawer)({
     display: "flex",
     flexDirection: "column",
     gap: 10,
+  },
+  "@media (max-width: 1000px)": {
+    "& .MuiPaper-root": {
+      width: "40vw",
+    },
+  },
+  "@media (max-width: 780px)": {
+    "& .MuiPaper-root": {
+      width: "60vw",
+    },
+  },
+  "@media (max-width: 580px)": {
+    "& .MuiPaper-root": {
+      width: "70vw",
+    },
+  },
+  "@media (max-width: 340px)": {
+    "& .MuiPaper-root": {
+      width: "80vw",
+    },
   },
 });
 

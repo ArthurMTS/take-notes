@@ -11,6 +11,13 @@ export const TaskBox = styled("div")({
   flexDirection: "column",
   gap: 20,
   position: "relative",
+  "@media (max-width: 1115px)": {
+    width: "80vw",
+  },
+  "@media (max-width: 470px)": {
+    width: "95vw",
+  },
+  overflow: "scroll",
 });
 
 export const BackButton = styled("img")({
@@ -24,11 +31,18 @@ export const BackButton = styled("img")({
   "&:hover": {
     transform: "scale(1.5)",
   },
+  "@media (max-width: 340px)": {
+    left: 0,
+  },
 });
 
 export const Button = styled(MuiButton)({
   color: "#374ebf",
-  borderColor: "#374ebf"
+  borderColor: "#374ebf",
+  "@media (max-width: 340px)": {
+    fontSize: 10,
+    padding: 5,
+  },
 });
 
 export const Div = styled("div")({
@@ -36,6 +50,10 @@ export const Div = styled("div")({
   justifyContent: "space-between",
   alignItems: "center",
   gap: 10,
+  "@media (max-width: 360px)": {
+    flexDirection: "column",
+    gap: 2,
+  },
 });
 
 export const TaskTitle = styled(Typography)({
@@ -46,6 +64,14 @@ export const TaskTitle = styled(Typography)({
   cursor: "pointer",
   "&:hover:after": {
     content: '" 🖊️"',
+  },
+  "@media (max-width: 470px)": {
+    "&:hover:after": {
+      content: '""',
+    },
+  },
+  "@media (max-width: 340px)": {
+    marginTop: -15,
   },
 });
 
@@ -58,6 +84,10 @@ export const TaskDescription = styled(Typography)({
   cursor: "pointer",
   borderRadius: 10,
   wordWrap: "break-word",
+  "@media (max-width: 360px)": {
+    minHeight: 140,
+    height: 0,
+  },
 });
 
 export const TaskDateItem = styled(TaskDate)({
@@ -69,11 +99,20 @@ export const TaskDateItem = styled(TaskDate)({
     fontFamily: "sans-serif",
   },
   marginRight: 20,
+  "@media (max-width: 340px)": {
+    fontSize: 16,
+    "& div p": {
+      fontSize: 12,
+    },
+  },
 });
 
 export const TagBox = styled(TaskTagsBox)({
   width: "55%",
   gap: 10,
+  "@media (max-width: 340px)": {
+    width: "70%",
+  },
 });
 
 export const TagItem = styled(Tag)({
@@ -94,6 +133,9 @@ export const TaskState = styled(TextField)({
     fontWeight: 700,
     fontSize: 18,
   },
+  "@media (max-width: 360px)": {
+    width: "100%",
+  },
 });
 
 export const TaskPriority = styled(TextField)({
@@ -105,5 +147,8 @@ export const TaskPriority = styled(TextField)({
     color: "#374ebf",
     fontWeight: 700,
     fontSize: 18,
+  },
+  "@media (max-width: 360px)": {
+    width: "100%",
   },
 });

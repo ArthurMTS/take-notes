@@ -16,11 +16,18 @@ export const MainProjectTitle = styled(Typography)({
   textAlign: "center",
   margin: "10px 0",
   cursor: "pointer",
+  "@media (max-width: 340px)": {
+    fontSize: 14,
+    margin: "5px 0",
+  },
 });
 
 export const HorizontalLine = styled("hr")({
   borderBottom: "3px solid #374ebf",
-  width: "80%"
+  width: "80%",
+  "@media (max-width: 340px)": {
+    borderBottom: "1px solid #374ebf",
+  },
 });
 
 export const UpdateTitleBox = styled("div")({
@@ -51,4 +58,9 @@ export const MainTaskList = styled("ul")({
   display: "flex",
   gap: 10,
   flexWrap: "wrap",
+  overflowY: "scroll",
+  justifyContent: "center",
+  "@media (max-width: 707px)": {
+    alignItems: "center",
+  },
 });

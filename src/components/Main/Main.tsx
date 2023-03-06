@@ -71,7 +71,7 @@ export const Main: React.FC = () => {
         </ClickAwayListener>
       )}
       <HorizontalLine />
-      <MainTaskList>
+      <MainTaskList className="nobar">
         {project?.tasks.map(task => 
           <TaskCard
             key={task.id}

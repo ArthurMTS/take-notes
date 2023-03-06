@@ -9,11 +9,17 @@ export const FooterBox = styled(Box)({
   position: "absolute",
   bottom: 0,
   width: "100%",
+  "@media (max-width: 340px)": {
+    padding: "10px 0 20px"
+  },
 });
 
 export const FooterDescription = styled(Typography)({
   fontSize: 12,
   color: "#E7E7E7",
+  "@media (max-width: 340px)": {
+    fontSize: 8,
+  },
 });
 
 export const FooterLink = styled("a")({

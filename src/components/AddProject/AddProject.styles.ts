@@ -24,6 +24,16 @@ export const AddProjectInput = styled(TextField)({
       borderColor: '#374ebf',
     },
   },
+  "@media (max-width: 860px)": {
+    "& input": {
+      fontSize: 14,
+    },
+  },
+  "@media (max-width: 775px)": {
+    "& input": {
+      fontSize: 12,
+    },
+  },
 });
 
 export const AddProjectButton = styled(Button)({
@@ -32,12 +42,22 @@ export const AddProjectButton = styled(Button)({
   "&:hover": {
     backgroundColor: "#374ebf",
   },
+  "@media (max-width: 560px)": {
+    fontSize: 10,
+  },
+  "@media (max-width: 340px)": {
+    padding: 0,
+    fontSize: 8,
+  },
 });
 
 export const AddProjectButtons = styled("div")({
   display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   marginTop: 10,
   gap: 10,
+  flexWrap: "wrap",
 });
 
 export const AddProjectButtonAdd = styled(Button)({
@@ -48,6 +68,15 @@ export const AddProjectButtonAdd = styled(Button)({
     color: "#E7E7E7",
     backgroundColor: "#374ebf",
   },
+  "@media (max-width: 560px)": {
+    fontSize: 10,
+  },
+  "@media (max-width: 470px)": {
+    fontSize: 6,
+  },
+  "@media (max-width: 340px)": {
+    padding: 0,
+  },
 });
 
 export const AddProjectButtonCancel = styled(Button)({
@@ -57,5 +86,14 @@ export const AddProjectButtonCancel = styled(Button)({
     borderColor: "#e51d33",
     color: "#E7E7E7",
     backgroundColor: "#e51d33",
+  },
+  "@media (max-width: 560px)": {
+    fontSize: 10,
+  },
+  "@media (max-width: 470px)": {
+    fontSize: 6,
+  },
+  "@media (max-width: 340px)": {
+    padding: 0,
   },
 });

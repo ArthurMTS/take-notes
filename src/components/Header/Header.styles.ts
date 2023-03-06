@@ -8,6 +8,11 @@ export const HeaderBox = styled(Box)({
   padding: "15px 50px",
   backgroundColor: "#222",
   gap: 10,
+  "@media (max-width: 340px)": {
+    "& img": {
+      width: 25,
+    },
+  },
 });
 
 export const HeaderTitle = styled(Link)({
@@ -20,5 +25,8 @@ export const HeaderTitle = styled(Link)({
   textDecoration: "none",
   "&:hover": {
     color: "#374ebf",
+  },
+  "@media (max-width: 340px)": {
+    fontSize: 18,
   },
 });

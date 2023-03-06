@@ -38,12 +38,31 @@ export const Div = styled("div")({
 });
 
 export const ItemIcon = styled("img")({
-
+  "@media (max-width: 775px)": {
+    "&": {
+      display: "none",
+    },
+  },
 });
 
 export const ItemTitle = styled(Typography)({
   fontSize: 18,
   color: "#E7E7E7",
+  "@media (max-width: 915px)": {
+    "&": {
+      fontSize: 14,
+    },
+  },
+  "@media (max-width: 440px)": {
+    "&": {
+      fontSize: 12,
+    },
+  },
+  "@media (max-width: 400px)": {
+    "&": {
+      fontSize: 10,
+    },
+  },
 });
 
 export const ItemQuantity = styled(Typography)({
@@ -56,6 +75,11 @@ export const ItemQuantity = styled(Typography)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  "@media (max-width: 570px)": {
+    "&": {
+      display: "none",
+    },
+  },
 });
 
 export const ItemDeleteButton = styled("img")({

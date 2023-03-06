@@ -102,7 +102,7 @@ export const Task: React.FC = () => {
   return (
     <React.Fragment>
       <Header />
-      <TaskBox>
+      <TaskBox className="nobar">
         <BackButton src={ChevronIcon} onClick={onBackButtonClick} />
         <Div>
           <TagBox className="nobar">
