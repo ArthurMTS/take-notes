@@ -30,6 +30,7 @@ export const TaskTagsBox = styled("ul")({
   display: "flex",
   overflowX: "scroll",
   width: 200,
+  gap: 5,
 });
 
 export const Tag = styled("li")({

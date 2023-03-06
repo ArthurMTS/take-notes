@@ -4,25 +4,22 @@ import { useNavigate } from "react-router-dom";
 
 import {
   TaskBox,
-  TaskDate,
-  TaskDateBox,
   TaskState,
   TaskTagsBox,
   TaskTitle,
   Tag,
   TaskDeleteButton,
 } from "./TaskCard.styles";
-import { formatedDate } from "@/utils/date";
 import { removeTask } from "@/store/projectSlicer";
 import TrashIcon from "@/assets/icons/trash.svg";
-import ClockIcon from "@/assets/icons/clock.svg";
+import { ShowDate } from "../ShowDate";
 
 interface TaskCardProps {
   projectID: number;
   id: number;
   title: string;
-  startDate: Date;
-  dueDate?: Date;
+  startDate: string;
+  dueDate?: string;
   state: "novo" | "em andamento" | "pronto" | string;
   tags?: {
     id: number;
@@ -62,26 +59,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         <TaskTitle>{title}</TaskTitle>
         <TaskState>{state}</TaskState>
       </div>
-      <TaskDateBox>
-        <TaskDate>
-          <img src={ClockIcon} alt="Clock" />
-          <div>
-            {formatedDate(new Date(startDate))}
-            <p>Data de Início</p>
-          </div>
-        </TaskDate>
-        {dueDate ? (
-          <TaskDate>
-            <img src={ClockIcon} alt="Clock" />
-            <div>
-              {formatedDate(new Date(dueDate))}
-              <p>Data de Fim</p>
-            </div>
-          </TaskDate>
-        ) : (
-          ""
-        )}
-      </TaskDateBox>
+      <ShowDate
+        startDate={startDate}
+        dueDate={dueDate}
+        editable={false}
+      />
       <TaskDeleteButton src={TrashIcon} onClick={onRemoveTaskButtonClick} />
     </TaskBox>
   );

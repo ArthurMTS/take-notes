@@ -15,8 +15,9 @@ export const getWeekendDate = () => {
   return result.join("-");
 };
 
-export const formatedDate = (date: Date = new Date()) => {
-  if (!date) return;
+export const formatedDate = (dateString: string) => {
+  const date = new Date(dateString);
   const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul","Ago","Set","Out","Nov","Dez"];
-  return ((date.getDate() + " " + meses[(date.getMonth())] + " " + date.getFullYear()));
+  const formatedDate = ((date.getDate() + " " + meses[(date.getMonth())] + " " + date.getFullYear()));
+  return formatedDate;
 };

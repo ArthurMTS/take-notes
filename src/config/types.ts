@@ -1,15 +1,17 @@
+export interface Tag {
+	id: number;
+	text: string;
+}
+
 export interface NoteData {
 	id: number;
 	title: string;
 	description?: string;
-	startDate: Date;
-	dueDate?: Date;
+	startDate: string;
+	dueDate?: string;
 	priority: "baixa" | "normal" | "alta" | string;
 	state: "novo" | "em andamento" | "pronto" | string;
-	tags?: {
-		id: number;
-		text: string;
-	}[];
+	tags?: Tag[];
 }
 
 export interface ProjectData {

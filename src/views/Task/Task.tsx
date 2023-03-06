@@ -1,14 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { RootState } from "@/store";
-import { NoteData, ProjectData } from "@/config/types";
+import { NoteData, ProjectData, Tag } from "@/config/types";
 import {
   TaskBox,
-  TaskDateItem,
   TaskPriority,
   TaskState,
   TaskTitle,
@@ -17,10 +16,15 @@ import {
   Div,
   TaskDescription,
   HZ,
+  BackButton,
+  Button,
 } from "./Task.styles";
-import { formatedDate } from "@/utils/date";
 import { MenuItem } from "@mui/material";
-import ClockIcon from "@/assets/icons/clock.svg";
+import ChevronIcon from "@/assets/icons/chevron-left.svg";
+import { uniqueID } from "@/utils/generateId";
+import { updateTask } from "@/store/projectSlicer";
+import { EditField } from "@/components/EditField";
+import { ShowDate } from "@/components/ShowDate";
 
 export const Task: React.FC = () => {
   const [task, setTask] = React.useState<NoteData>({} as NoteData);
@@ -31,66 +35,150 @@ export const Task: React.FC = () => {
   );
   const taskID = useLocation().pathname.split("/")[2];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const project = projects.filter(project => project.id === projectID)[0];
     const task = project.tasks.filter(task => task.id === +taskID)[0];
     if (!task) navigate("/");
     setTask(task);
-  });
+  }, [projects, projectID, taskID, navigate]);
+
+  const onBackButtonClick = () => {
+    navigate("/");
+  };
+  const onAddTag = (value: string) => {
+    const newTags: Tag[] = task?.tags?.map(tag => tag) || ([] as Tag[]);
+    newTags.push({ id: uniqueID(), text: value });
+    dispatch(
+      updateTask({ projectID, taskID: task?.id, task: { tags: newTags } }),
+    );
+  };
+  const onDeleteTag = (tagID: number) => {
+    const newTags: Tag[] =
+      task?.tags?.filter(tag => tag.id !== tagID) || ([] as Tag[]);
+    dispatch(
+      updateTask({ projectID, taskID: task?.id, task: { tags: newTags } }),
+    );
+  };
+  const onUpdateTitle = (value: string) => {
+    dispatch(
+      updateTask({ projectID, taskID: task?.id, task: { title: value } }),
+    );
+  };
+  const onUpdateDescription = (value: string) => {
+    dispatch(
+      updateTask({ projectID, taskID: task?.id, task: { description: value } }),
+    );
+  };
+  const onStateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      updateTask({
+        projectID,
+        taskID: task?.id,
+        task: { state: event.target.value },
+      }),
+    );
+  };
+  const onPriorityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      updateTask({
+        projectID,
+        taskID: task?.id,
+        task: { priority: event.target.value },
+      }),
+    );
+  };
+  const onDateChange = (id: string, value: string) => {
+    dispatch(
+      updateTask({
+        projectID,
+        taskID: task?.id,
+        task: { [id]: value },
+      }),
+    );
+  };
 
   return (
     <React.Fragment>
       <Header />
       <TaskBox>
-        <TagBox className="nobar">
-          {task?.tags?.map(tag => (
-            <TagItem key={tag.id}>{tag.text}</TagItem>
-          ))}
-        </TagBox>
+        <BackButton src={ChevronIcon} onClick={onBackButtonClick} />
         <Div>
-          <TaskTitle>{task?.title}</TaskTitle>
-          <TaskState label="Estado" select value={task?.state}>
+          <TagBox className="nobar">
+            {task?.tags?.map(tag => (
+              <TagItem
+                key={tag.id}
+                title="Clique para remover"
+                onClick={() => onDeleteTag(tag.id)}
+              >
+                {tag.text}
+              </TagItem>
+            ))}
+          </TagBox>
+
+          <EditField
+            buttonLabel="Adicionar"
+            placeholder="Nome da Tag"
+            onEdit={onAddTag}
+            defaultValue=""
+          >
+            <Button variant="outlined">Adicionar Tag</Button>
+          </EditField>
+        </Div>
+        <Div>
+          <EditField
+            buttonLabel="Salvar"
+            placeholder="Novo Título"
+            onEdit={onUpdateTitle}
+            defaultValue={task?.title}
+          >
+            <TaskTitle>{task?.title}</TaskTitle>
+          </EditField>
+          <TaskState
+            label="Estado"
+            value={task?.state || "novo"}
+            onChange={onStateChange}
+            select
+          >
             <MenuItem value="novo">Novo</MenuItem>
             <MenuItem value="em andamento">Em Andamento</MenuItem>
             <MenuItem value="pronto">Pronto</MenuItem>
           </TaskState>
         </Div>
         <Div>
-          <TaskPriority label="Prioridade" select value={task?.priority}>
+          <TaskPriority
+            label="Prioridade"
+            value={task?.priority || "normal"}
+            onChange={onPriorityChange}
+            select
+          >
             <MenuItem value="baixa">Baixa</MenuItem>
             <MenuItem value="normal">Normal</MenuItem>
             <MenuItem value="alta">Alta</MenuItem>
           </TaskPriority>
           <Div>
-            <Div>
-              <TaskDateItem>
-                <img src={ClockIcon} alt="Clock" />
-                <div>
-                  {formatedDate(new Date(task?.startDate))}
-                  <p>Data de Início</p>
-                </div>
-              </TaskDateItem>
-              {task?.dueDate ? (
-                <TaskDateItem>
-                  <img src={ClockIcon} alt="Clock" />
-                  <div>
-                    {formatedDate(new Date(task?.dueDate))}
-                    <p>Data de Fim</p>
-                  </div>
-                </TaskDateItem>
-              ) : (
-                ""
-              )}
-            </Div>
+            <ShowDate
+              startDate={task?.startDate}
+              dueDate={task?.dueDate}
+              editable={true}
+              onEdit={onDateChange}
+            />
           </Div>
         </Div>
         <HZ />
-        <TaskDescription className="nobar">
-          {task?.description
-            ? task?.description
-            : "Está um pouco vazio... clique e descreva mais sua tarefa!"}
-        </TaskDescription>
+        <EditField
+          buttonLabel="Salvar"
+          placeholder="Digite sua descrição..."
+          onEdit={onUpdateDescription}
+          defaultValue={task?.description}
+        >
+          <TaskDescription className="nobar">
+            {task?.description
+              ? task?.description
+              : "Está um pouco vazio... clique e descreva mais sua tarefa!"}
+          </TaskDescription>
+        </EditField>
       </TaskBox>
       <Footer />
     </React.Fragment>
