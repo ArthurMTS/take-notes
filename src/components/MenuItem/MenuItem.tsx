@@ -44,17 +44,23 @@ export const MenuItem: React.FC<MenuItemProps> = ({
       <ItemContent className={active ? "active" : ""} onClick={onClick}>
         <Div>
           <ItemIcon src={icon} />
-          <ItemTitle>{title}</ItemTitle>
+          {canBeDeleted ? (
+            title?.length < 10 ? (
+              <ItemTitle>{title}</ItemTitle>
+            ) : (
+              <ItemTitle title={title}>{title.slice(0, 10) + "..."}</ItemTitle>
+            )
+          ) : (
+            <ItemTitle>{title}</ItemTitle>
+          )}
         </Div>
         <ItemQuantity>{quantity}</ItemQuantity>
       </ItemContent>
-      {canBeDeleted ?
-        <ItemDeleteButton
-          src={TrashIcon}
-          onClick={onDeleteButtonClick}
-        />
-        : ""
-      }
+      {canBeDeleted ? (
+        <ItemDeleteButton src={TrashIcon} onClick={onDeleteButtonClick} />
+      ) : (
+        ""
+      )}
     </ItemWrapper>
   );
 };

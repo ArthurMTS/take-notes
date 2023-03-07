@@ -13,6 +13,9 @@ export const TaskBox = styled("div")({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+  "@media (max-width: 340px)": {
+    width: 200,
+  },
 });
 
 export const TaskTitle = styled(Typography)({

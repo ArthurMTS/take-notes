@@ -26,4 +26,16 @@ export const TaskDate = styled("div")({
       color: "#374ebf",
     },
   },
+  "@media (max-width: 340px)": {
+    fontSize: 10,
+    minWidth: 80,
+    "& img": {
+      width: 15,
+    },
+    "& div": {
+      "& p": {
+        fontSize: 8,
+      },
+    },
+  },
 });

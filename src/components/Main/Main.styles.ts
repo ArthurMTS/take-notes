@@ -9,6 +9,12 @@ export const MainBox = styled("div")({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  "@media (max-width: 850px)": {
+    width: "75vw",
+  },
+  "@media (max-width: 340px)": {
+    width: "70vw",
+  },
 });
 
 export const MainProjectTitle = styled(Typography)({

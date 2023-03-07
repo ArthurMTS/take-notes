@@ -9,8 +9,12 @@ export const MenuBox = styled(Box)({
   position: "absolute",
   left: 0,
   top: 55,
+  "@media (max-width: 850px)": {
+    width: "25vw",
+  },
   "@media (max-width: 340px)": {
     fontSize: 8,
+    width: "30vw",
   },
 });
 

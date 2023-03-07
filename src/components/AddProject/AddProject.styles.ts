@@ -7,6 +7,9 @@ export const AddProjectWrapper = styled("div")({
   justifyContent: "center",
   alignItems: "center",
   padding: "0 10px",
+  "@media (max-width: 340px)": {
+    padding: "0 5px",
+  },
 });
 
 export const AddProjectInput = styled(TextField)({
@@ -32,6 +35,13 @@ export const AddProjectInput = styled(TextField)({
   "@media (max-width: 775px)": {
     "& input": {
       fontSize: 12,
+    },
+  },
+  "@media (max-width: 340px)": {
+    "& input": {
+      width: "100%",
+      padding: 5,
+      fontSize: 10,
     },
   },
 });

@@ -11,6 +11,9 @@ export const ItemWrapper = styled("li")({
   alignItems: "center",
   justifyContent: "center",
   gap: 5,
+  "@media (max-width: 340px)": {
+    gap: 2,
+  },
 });
 
 export const ItemContent = styled("div")({
@@ -27,6 +30,9 @@ export const ItemContent = styled("div")({
   },
   "&.active": {
     backgroundColor: "#374ebf",
+  },
+  "@media (max-width: 340px)": {
+    padding: 3,
   },
 });
 
@@ -63,6 +69,11 @@ export const ItemTitle = styled(Typography)({
       fontSize: 10,
     },
   },
+  "@media (max-width: 340px)": {
+    "&": {
+      fontSize: 8,
+    },
+  },
 });
 
 export const ItemQuantity = styled(Typography)({
@@ -87,7 +98,6 @@ export const ItemDeleteButton = styled("img")({
     animation: "shake 0.5s",
     animationIterationCount: "infinite",
   },
-
  "@keyframes shake": {
     "0%": { transform: "translate(1px, 1px) rotate(0deg)", },
     "10%": { transform: "translate(-1px, -2px) rotate(-1deg)", },
@@ -100,5 +110,10 @@ export const ItemDeleteButton = styled("img")({
     "80%": { transform: "translate(-1px, -1px) rotate(1deg)", },
     "90%": { transform: "translate(1px, 2px) rotate(0deg)", },
     "100%": { transform: "translate(1px, -2px) rotate(-1deg)", },
+  },
+  "@media (max-width: 340px)": {
+    width: 15,
+    height: 15,
+    paddingBottom: 2,
   },
 });
