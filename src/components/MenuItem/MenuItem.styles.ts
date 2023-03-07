@@ -53,6 +53,7 @@ export const ItemIcon = styled("img")({
 
 export const ItemTitle = styled(Typography)({
   fontSize: 18,
+  textTransform: "capitalize",
   color: "#E7E7E7",
   "@media (max-width: 915px)": {
     "&": {

@@ -22,6 +22,7 @@ export const MainProjectTitle = styled(Typography)({
   textAlign: "center",
   margin: "10px 0",
   cursor: "pointer",
+  textTransform: "capitalize",
   "@media (max-width: 340px)": {
     fontSize: 14,
     margin: "5px 0",

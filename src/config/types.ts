@@ -4,6 +4,7 @@ export interface Tag {
 }
 
 export interface NoteData {
+	projectID: number;
 	id: number;
 	title: string;
 	description?: string;
@@ -17,6 +18,5 @@ export interface NoteData {
 export interface ProjectData {
 	id: number;
 	title: string;
-	tasks: NoteData[];
 	deletable: boolean;
 }

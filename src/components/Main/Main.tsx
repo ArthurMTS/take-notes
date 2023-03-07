@@ -15,23 +15,28 @@ import { RootState } from "@/store";
 import { updateProject, changeProject } from "@/store/projectSlicer";
 import { AddTask } from "@/components/AddTask";
 import { TaskCard } from "@/components/TaskCard";
+import { NoteData, ProjectData } from "@/config/types";
 
 export const Main: React.FC = () => {
   const [update, setUpdate] = React.useState(false);
-  const project = useSelector((state: RootState) => {
-    return state.projects.projects.find(
+  const [project, tasksToShow] = useSelector((state: RootState): [ProjectData, NoteData[]] => {
+    const project = state.projects.projects.find(
       project => project.id === state.projects.activeProject,
-    );
+    ) || state.projects.projects[0];
+    
+    return [project, state.projects.tasksToShow];
   });
   const [projectTitle, setProjectTitle] = React.useState(project?.title);
+  const [tasks, setTasks] = React.useState(tasksToShow);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     setProjectTitle(project?.title);
+    setTasks(tasksToShow);
 
     if (!project)
       dispatch(changeProject(0));
-  }, [project]);
+  }, [project, tasksToShow]);
 
   const onTitleClick = () => {
     if (project?.deletable) setUpdate(true);
@@ -51,7 +56,10 @@ export const Main: React.FC = () => {
   return (
     <MainBox>
       {!update ? (
-        <MainProjectTitle onClick={onTitleClick}>
+        <MainProjectTitle
+          onClick={onTitleClick}
+          title={project?.deletable ? "Clique para renomear" : ""}
+        >
           {project?.title}
         </MainProjectTitle>
       ) : (
@@ -72,7 +80,7 @@ export const Main: React.FC = () => {
       )}
       <HorizontalLine />
       <MainTaskList className="nobar">
-        {project?.tasks.map(task => 
+        {tasks.map(task => 
           <TaskCard
             key={task.id}
             projectID={project?.id}
@@ -85,7 +93,7 @@ export const Main: React.FC = () => {
           />
         )}
       </MainTaskList>
-      <AddTask projectID={project?.id || 0} />
+      {project?.id < 1 || project?.id > 2 ? <AddTask projectID={project?.id || 0} /> : ""}
     </MainBox>
   );
 };

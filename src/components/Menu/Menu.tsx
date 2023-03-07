@@ -10,12 +10,23 @@ import ClipboardIcon from "@/assets/icons/clipboard.svg";
 import ArchiveIcon from "@/assets/icons/archive.svg";
 import TargetIcon from "@/assets/icons/target.svg";
 import { AddProject } from "../AddProject";
+import { ProjectData } from "@/config/types";
+import { taskFilter } from "@/utils/taskFilter";
+
+interface Project extends ProjectData {
+  quantity: number;
+};
 
 export const Menu: React.FC = () => {
   const activeProject = useSelector((state: RootState) => state.projects.activeProject);
-  const [inbox, today, week, ...projects] = useSelector(
-    (state: RootState) => state.projects.projects,
-  );
+  const [inbox, today, week, ...projects] = useSelector((state: RootState): Project[] => {
+    return state.projects.projects.map(project => {
+      return {
+        ...project,
+        quantity: taskFilter(project?.id, state.projects.tasks).length,
+      };
+    });
+  });
   const dispatch = useDispatch();
 
   const onProjectListItemClick = (id: number) => {
@@ -32,7 +43,7 @@ export const Menu: React.FC = () => {
           active={activeProject === inbox.id}
           icon={InboxIcon}
           title={inbox.title}
-          quantity={inbox.tasks.length}
+          quantity={inbox.quantity}
           canBeDeleted={inbox.deletable}
           onClick={() => onProjectListItemClick(inbox.id)}
         />
@@ -42,7 +53,7 @@ export const Menu: React.FC = () => {
           active={activeProject === today.id}
           icon={ClipboardIcon}
           title={today.title}
-          quantity={today.tasks.length}
+          quantity={today.quantity}
           canBeDeleted={today.deletable}
           onClick={() => onProjectListItemClick(today.id)}
         />
@@ -52,7 +63,7 @@ export const Menu: React.FC = () => {
           active={activeProject === week.id}
           icon={ArchiveIcon}
           title={week.title}
-          quantity={week.tasks.length}
+          quantity={week.quantity}
           canBeDeleted={week.deletable}
           onClick={() => onProjectListItemClick(week.id)}
         />
@@ -63,7 +74,7 @@ export const Menu: React.FC = () => {
             active={activeProject === project.id}
             icon={TargetIcon}
             title={project.title}
-            quantity={project.tasks.length}
+            quantity={project.quantity}
             canBeDeleted={project.deletable}
             onClick={() => onProjectListItemClick(project.id)}
           />

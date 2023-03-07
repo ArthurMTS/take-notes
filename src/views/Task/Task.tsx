@@ -28,9 +28,9 @@ import { ShowDate } from "@/components/ShowDate";
 
 export const Task: React.FC = () => {
   const [task, setTask] = React.useState<NoteData>({} as NoteData);
-  const [projectID, projects] = useSelector(
-    (state: RootState): [number, ProjectData[]] => {
-      return [state.projects.activeProject, state.projects.projects];
+  const [projectID, tasks] = useSelector(
+    (state: RootState): [number, NoteData[]] => {
+      return [state.projects.activeProject, state.projects.tasksToShow];
     },
   );
   const taskID = useLocation().pathname.split("/")[2];
@@ -38,11 +38,10 @@ export const Task: React.FC = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const project = projects.filter(project => project.id === projectID)[0];
-    const task = project.tasks.filter(task => task.id === +taskID)[0];
+    const task = tasks.filter(task => task.id === +taskID)[0];
     if (!task) navigate("/");
     setTask(task);
-  }, [projects, projectID, taskID, navigate]);
+  }, [tasks, projectID, taskID, navigate]);
 
   const onBackButtonClick = () => {
     navigate("/");

@@ -91,8 +91,9 @@ export const AddTask: React.FC<AddTaskProps> = ({ projectID }) => {
       startDate,
       dueDate,
       tags,
+      projectID,
     };
-    dispatch(addTask({ projectID, task: newTask }));
+    dispatch(addTask({ task: newTask }));
     clearForm();
   };
 

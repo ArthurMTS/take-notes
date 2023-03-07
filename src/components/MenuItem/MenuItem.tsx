@@ -18,7 +18,7 @@ interface MenuItemProps {
   active: boolean;
   icon: string;
   title: string;
-  quantity: number;
+  quantity?: number;
   canBeDeleted: boolean;
   onClick: () => void;
 }

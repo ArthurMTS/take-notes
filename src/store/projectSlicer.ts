@@ -2,16 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { NoteData } from "@/config/types";
 import { uniqueID } from "@/utils/generateId";
+import { taskFilter } from "@/utils/taskFilter";
+import { taskSort } from "@/utils/taskSort";
 
 const initialState = {
   nextId: 3,
   activeProject: 0,
   projects: [
-    { id: 0, title: "Caixa de Entrada", tasks: [] as NoteData[], deletable: false },
-    { id: 1, title: "Hoje", tasks: [] as NoteData[], deletable: false },
-    { id: 2, title: "Essa Semana", tasks: [] as NoteData[], deletable: false },
+    { id: 0, title: "Caixa de Entrada", deletable: false },
+    { id: 1, title: "Hoje", deletable: false },
+    { id: 2, title: "Essa Semana", deletable: false },
   ],
-}
+  tasksToShow: [] as NoteData[],
+  tasks: [] as NoteData[],
+};
 
 const projectSlicer = createSlice({
   name: "project",
@@ -25,7 +29,6 @@ const projectSlicer = createSlice({
         deletable: true,
       };
       state.nextId += 1;
-
       state.projects.push(newProject);
     },
     updateProject: (state, { payload }) => {
@@ -33,63 +36,51 @@ const projectSlicer = createSlice({
         if (project.id === payload.id) {
           project.title = payload.title;
         }
-
         return project;
       });
     },
     removeProject: (state, { payload }) => {
       state.projects = state.projects.filter(project => project.id !== payload);
+      state.tasks = state.tasks.filter(task => task.projectID !== payload);
+      state.tasksToShow = state.tasksToShow.filter(task => task.projectID !== payload);
     },
     changeProject: (state, { payload }) => {
       state.activeProject = payload;
+      state.tasksToShow = taskFilter(payload, state.tasks).sort(taskSort);
     },
     addTask: (state, { payload }) => {
-      state.projects = state.projects.map(project => {
-        if (project.id === payload.projectID) {
-          const newTask: NoteData = {
-            id: uniqueID(),
-            ...payload.task,
-            state: "novo",
-            priority: "normal",
-          };
-          project.tasks.push(newTask);
-        }
-
-        return project;
-      });
+      const newTask: NoteData = {
+        id: uniqueID(),
+        ...payload.task,
+        state: "novo",
+        priority: "normal",
+      };
+      state.tasks.push(newTask);
+      state.tasksToShow.push(newTask);
+      state.tasksToShow = state.tasksToShow.sort(taskSort);
     },
     updateTask: (state, { payload }) => {
-      state.projects = state.projects.map(project => {
-        if (project.id === payload.projectID) {
-          project.tasks = project.tasks.map(task => {
-            if (task.id === payload.taskID) {
-              const newTask = {
-                ...task,
-                ...payload.task,
-              }
-
-              task = newTask
-            }
-
-            return task;
-          })
+      const findAndUpdate = (task: NoteData) => {
+        if (task.id === payload.taskID) {
+          const newTask = {
+            ...task,
+            ...payload.task,
+          };
+          task = newTask;
         }
-
-        return project;
-      });
+        return task;
+      };
+      state.tasks = state.tasks.map(findAndUpdate);
+      state.tasksToShow = state.tasksToShow.map(findAndUpdate);
     },
     removeTask: (state, { payload }) => {
-      state.projects = state.projects.map(project => {
-        if (project.id === payload.projectID)
-          project.tasks = project.tasks.filter(task => task.id !== payload.taskID);
-
-        return project;
-      });
+      state.tasks = state.tasks.filter(task => task.id !== payload.taskID);
+      state.tasksToShow = state.tasksToShow.filter(task => task.id !== payload.taskID);
     },
   },
 });
 
-export const { 
+export const {
   addProject,
   updateProject,
   removeProject,
