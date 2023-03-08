@@ -1,7 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { AddProjectButton, AddProjectButtonAdd, AddProjectButtonCancel, AddProjectButtons, AddProjectInput, AddProjectWrapper } from "./AddProject.styles";
+import {
+  AddProjectButton,
+  AddProjectButtonAdd,
+  AddProjectButtonCancel,
+  AddProjectButtons,
+  AddProjectInput,
+  AddProjectWrapper,
+} from "./AddProject.styles";
 import { addProject } from "@/store/projectSlicer";
 
 export const AddProject: React.FC = () => {
@@ -16,7 +23,9 @@ export const AddProject: React.FC = () => {
     setOpen(false);
     setProjectName("");
   };
-  const onProjectNameInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onProjectNameInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setProjectName(event.target.value);
   };
   const onAddProjectButtonClick = () => {
@@ -30,13 +39,14 @@ export const AddProject: React.FC = () => {
 
   return (
     <AddProjectWrapper>
-      {!open ?
+      {!open ? (
         <AddProjectButton
           variant="contained"
           onClick={onOpenAddProjectInputButtonClick}
         >
           Criar Novo Projeto
-        </AddProjectButton> :
+        </AddProjectButton>
+      ) : (
         <React.Fragment>
           <AddProjectInput
             placeholder="Nome do projeto"
@@ -59,7 +69,7 @@ export const AddProject: React.FC = () => {
             </AddProjectButtonCancel>
           </AddProjectButtons>
         </React.Fragment>
-      }
+      )}
     </AddProjectWrapper>
   );
 };

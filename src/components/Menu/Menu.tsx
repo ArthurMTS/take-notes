@@ -15,18 +15,22 @@ import { taskFilter } from "@/utils/taskFilter";
 
 interface Project extends ProjectData {
   quantity: number;
-};
+}
 
 export const Menu: React.FC = () => {
-  const activeProject = useSelector((state: RootState) => state.projects.activeProject);
-  const [inbox, today, week, ...projects] = useSelector((state: RootState): Project[] => {
-    return state.projects.projects.map(project => {
-      return {
-        ...project,
-        quantity: taskFilter(project?.id, state.projects.tasks).length,
-      };
-    });
-  });
+  const activeProject = useSelector(
+    (state: RootState) => state.projects.activeProject,
+  );
+  const [inbox, today, week, ...projects] = useSelector(
+    (state: RootState): Project[] => {
+      return state.projects.projects.map((project: ProjectData) => {
+        return {
+          ...project,
+          quantity: taskFilter(project?.id, state.projects.tasks).length,
+        };
+      });
+    },
+  );
   const dispatch = useDispatch();
 
   const onProjectListItemClick = (id: number) => {

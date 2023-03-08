@@ -16,15 +16,15 @@ export const AddProjectInput = styled(TextField)({
   "& input": {
     color: "#FFF",
   },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#374ebf',
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#374ebf",
     },
-    '&:hover fieldset': {
-      borderColor: '#374ebf',
+    "&:hover fieldset": {
+      borderColor: "#374ebf",
     },
-    '&.Mui-focused fieldset': {
-      borderColor: '#374ebf',
+    "&.Mui-focused fieldset": {
+      borderColor: "#374ebf",
     },
   },
   "@media (max-width: 860px)": {

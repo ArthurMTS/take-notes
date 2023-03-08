@@ -1,12 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { ClickAwayListener } from "@mui/material";
 
 import { TaskDate, TaskDateBox } from "./ShowDate.styles";
-import ClockIcon from "@/assets/icons/clock.svg";
-import { formatedDate, getDate, getWeekendDate } from "@/utils/date";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 import { Input } from "../AddTask/AddTask.styles";
-import { ClickAwayListener } from "@mui/material";
+import { formatedDate, getDate, getWeekendDate } from "@/utils/date";
+import { RootState } from "@/store";
+import ClockIcon from "@/assets/icons/clock.svg";
 
 interface ShowDateProps {
   startDate: string;
@@ -25,17 +25,15 @@ const DateComponent: React.FC<DateComponentProps> = ({
   date,
   label,
   onClick,
-}) => {
-  return (
-    <TaskDate onClick={onClick}>
-      <img src={ClockIcon} alt="Clock" />
-      <div>
-        {formatedDate(date)}
-        <p>{label}</p>
-      </div>
-    </TaskDate>
-  );
-};
+}) => (
+  <TaskDate onClick={onClick}>
+    <img src={ClockIcon} alt="Clock" />
+    <div>
+      {formatedDate(date)}
+      <p>{label}</p>
+    </div>
+  </TaskDate>
+);
 
 export const ShowDate: React.FC<ShowDateProps> = ({
   startDate,

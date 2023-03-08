@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { RootState } from "@/store";
-import { NoteData, ProjectData, Tag } from "@/config/types";
+import { NoteData, Tag } from "@/config/types";
 import {
   TaskBox,
   TaskPriority,

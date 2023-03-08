@@ -126,7 +126,7 @@ export const HZ = styled(HorizontalLine)({
 export const TaskState = styled(TextField)({
   width: 250,
   "& .MuiOutlinedInput-notchedOutline": {
-    border: "none"
+    border: "none",
   },
   "& label": {
     color: "#374ebf",
@@ -141,7 +141,7 @@ export const TaskState = styled(TextField)({
 export const TaskPriority = styled(TextField)({
   width: 150,
   "& .MuiOutlinedInput-notchedOutline": {
-    border: "none"
+    border: "none",
   },
   "& label": {
     color: "#374ebf",

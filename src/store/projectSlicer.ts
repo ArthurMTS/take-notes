@@ -1,21 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { NoteData } from "@/config/types";
+import { NoteData, ProjectData } from "@/config/types";
 import { uniqueID } from "@/utils/generateId";
 import { taskFilter } from "@/utils/taskFilter";
 import { taskSort } from "@/utils/taskSort";
+import { getStorage, setStorage } from "@/utils/storage";
 
-const initialState = {
-  nextId: 3,
-  activeProject: 0,
-  projects: [
-    { id: 0, title: "Caixa de Entrada", deletable: false },
-    { id: 1, title: "Hoje", deletable: false },
-    { id: 2, title: "Essa Semana", deletable: false },
-  ],
-  tasksToShow: [] as NoteData[],
-  tasks: [] as NoteData[],
-};
+const initialState = getStorage();
 
 const projectSlicer = createSlice({
   name: "project",
@@ -30,23 +21,33 @@ const projectSlicer = createSlice({
       };
       state.nextId += 1;
       state.projects.push(newProject);
+      setStorage(state);
     },
     updateProject: (state, { payload }) => {
-      state.projects = state.projects.map(project => {
+      state.projects = state.projects.map((project: ProjectData) => {
         if (project.id === payload.id) {
           project.title = payload.title;
         }
         return project;
       });
+      setStorage(state);
     },
     removeProject: (state, { payload }) => {
-      state.projects = state.projects.filter(project => project.id !== payload);
-      state.tasks = state.tasks.filter(task => task.projectID !== payload);
-      state.tasksToShow = state.tasksToShow.filter(task => task.projectID !== payload);
+      state.projects = state.projects.filter(
+        (project: ProjectData) => project.id !== payload,
+      );
+      state.tasks = state.tasks.filter(
+        (task: NoteData) => task.projectID !== payload,
+      );
+      state.tasksToShow = state.tasksToShow.filter(
+        (task: NoteData) => task.projectID !== payload,
+      );
+      setStorage(state);
     },
     changeProject: (state, { payload }) => {
       state.activeProject = payload;
       state.tasksToShow = taskFilter(payload, state.tasks).sort(taskSort);
+      setStorage(state);
     },
     addTask: (state, { payload }) => {
       const newTask: NoteData = {
@@ -58,6 +59,7 @@ const projectSlicer = createSlice({
       state.tasks.push(newTask);
       state.tasksToShow.push(newTask);
       state.tasksToShow = state.tasksToShow.sort(taskSort);
+      setStorage(state);
     },
     updateTask: (state, { payload }) => {
       const findAndUpdate = (task: NoteData) => {
@@ -72,10 +74,16 @@ const projectSlicer = createSlice({
       };
       state.tasks = state.tasks.map(findAndUpdate);
       state.tasksToShow = state.tasksToShow.map(findAndUpdate);
+      setStorage(state);
     },
     removeTask: (state, { payload }) => {
-      state.tasks = state.tasks.filter(task => task.id !== payload.taskID);
-      state.tasksToShow = state.tasksToShow.filter(task => task.id !== payload.taskID);
+      state.tasks = state.tasks.filter(
+        (task: NoteData) => task.id !== payload.taskID,
+      );
+      state.tasksToShow = state.tasksToShow.filter(
+        (task: NoteData) => task.id !== payload.taskID,
+      );
+      setStorage(state);
     },
   },
 });

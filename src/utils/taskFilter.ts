@@ -20,5 +20,5 @@ export const taskFilter = (projectID: number, tasks: NoteData[]) => {
       });
     default:
       return tasks.filter(task => task.projectID === projectID);
-  };
+  }
 };

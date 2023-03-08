@@ -19,13 +19,16 @@ import { NoteData, ProjectData } from "@/config/types";
 
 export const Main: React.FC = () => {
   const [update, setUpdate] = React.useState(false);
-  const [project, tasksToShow] = useSelector((state: RootState): [ProjectData, NoteData[]] => {
-    const project = state.projects.projects.find(
-      project => project.id === state.projects.activeProject,
-    ) || state.projects.projects[0];
-    
-    return [project, state.projects.tasksToShow];
-  });
+  const [project, tasksToShow] = useSelector(
+    (state: RootState): [ProjectData, NoteData[]] => {
+      const project =
+        state.projects.projects.find(
+          (project: ProjectData) => project.id === state.projects.activeProject,
+        ) || state.projects.projects[0];
+
+      return [project, state.projects.tasksToShow];
+    },
+  );
   const [projectTitle, setProjectTitle] = React.useState(project?.title);
   const [tasks, setTasks] = React.useState(tasksToShow);
   const dispatch = useDispatch();
@@ -34,8 +37,7 @@ export const Main: React.FC = () => {
     setProjectTitle(project?.title);
     setTasks(tasksToShow);
 
-    if (!project)
-      dispatch(changeProject(0));
+    if (!project) dispatch(changeProject(0));
   }, [project, tasksToShow]);
 
   const onTitleClick = () => {
@@ -45,7 +47,9 @@ export const Main: React.FC = () => {
     setUpdate(false);
     setProjectTitle(project?.title);
   };
-  const onProjectTitleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onProjectTitleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setProjectTitle(event.target.value);
   };
   const onUpdateButtonClick = () => {
@@ -69,10 +73,7 @@ export const Main: React.FC = () => {
               value={projectTitle}
               onChange={onProjectTitleInputChange}
             />
-            <UpdateButton
-              variant="contained"
-              onClick={onUpdateButtonClick}
-            >
+            <UpdateButton variant="contained" onClick={onUpdateButtonClick}>
               Salvar
             </UpdateButton>
           </UpdateTitleBox>
@@ -80,7 +81,7 @@ export const Main: React.FC = () => {
       )}
       <HorizontalLine />
       <MainTaskList className="nobar">
-        {tasks.map(task => 
+        {tasks.map(task => (
           <TaskCard
             key={task.id}
             projectID={project?.id}
@@ -91,9 +92,13 @@ export const Main: React.FC = () => {
             dueDate={task.dueDate}
             tags={task.tags}
           />
-        )}
+        ))}
       </MainTaskList>
-      {project?.id < 1 || project?.id > 2 ? <AddTask projectID={project?.id || 0} /> : ""}
+      {project?.id < 1 || project?.id > 2 ? (
+        <AddTask projectID={project?.id || 0} />
+      ) : (
+        ""
+      )}
     </MainBox>
   );
 };

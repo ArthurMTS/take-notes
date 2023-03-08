@@ -10,7 +10,7 @@ export const FooterBox = styled(Box)({
   bottom: 0,
   width: "100%",
   "@media (max-width: 340px)": {
-    padding: "10px 0 20px"
+    padding: "10px 0 20px",
   },
 });
 
@@ -27,6 +27,6 @@ export const FooterLink = styled("a")({
   textDecoration: "none",
   transition: "all .2s",
   "&:hover": {
-    color: "#374ebf"
+    color: "#374ebf",
   },
 });

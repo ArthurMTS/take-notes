@@ -11,8 +11,8 @@ import {
   TaskDeleteButton,
 } from "./TaskCard.styles";
 import { removeTask } from "@/store/projectSlicer";
+import { ShowDate } from "@/components/ShowDate";
 import TrashIcon from "@/assets/icons/trash.svg";
-import { ShowDate } from "../ShowDate";
 
 interface TaskCardProps {
   projectID: number;

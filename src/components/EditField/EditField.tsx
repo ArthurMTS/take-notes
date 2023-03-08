@@ -41,20 +41,22 @@ export const EditField: React.FC<EditField> = ({
   return (
     <React.Fragment>
       {edit ? (
-      <ClickAwayListener onClickAway={onClickAway}>
-        <Div>
-          <ChangeInput
-            placeholder={placeholder}
-            value={input}
-            onChange={onInputChange}
-            multiline
-          />
-          <Button variant="outlined" onClick={onUpdateButtonClick}>
-            {buttonLabel}
-          </Button>
-        </Div>
-      </ClickAwayListener>
-      ) : (<Div onClick={onChildrenClick}>{children}</Div>)}
+        <ClickAwayListener onClickAway={onClickAway}>
+          <Div>
+            <ChangeInput
+              placeholder={placeholder}
+              value={input}
+              onChange={onInputChange}
+              multiline
+            />
+            <Button variant="outlined" onClick={onUpdateButtonClick}>
+              {buttonLabel}
+            </Button>
+          </Div>
+        </ClickAwayListener>
+      ) : (
+        <Div onClick={onChildrenClick}>{children}</Div>
+      )}
     </React.Fragment>
   );
 };
