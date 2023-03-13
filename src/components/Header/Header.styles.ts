@@ -1,9 +1,11 @@
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
 export const HeaderBox = styled(Box)({
   display: "flex",
+  justifyContent: "space-between",
   alignItems: "center",
   padding: "15px 50px",
   backgroundColor: "#222",
@@ -13,6 +15,13 @@ export const HeaderBox = styled(Box)({
       width: 25,
     },
   },
+});
+
+export const Div = styled("div")({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 10,
 });
 
 export const HeaderTitle = styled(Link)({

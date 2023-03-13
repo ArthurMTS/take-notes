@@ -6,6 +6,7 @@ interface stateData {
   projects: ProjectData[];
   tasksToShow: NoteData[];
   tasks: NoteData[];
+  history: string[];
 }
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   ],
   tasksToShow: [] as NoteData[],
   tasks: [] as NoteData[],
+  history: [],
 };
 
 export const setStorage = (state: stateData) => {
