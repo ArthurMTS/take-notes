@@ -5,19 +5,22 @@ import { Button as MuiButton, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const TaskBox = styled("div")({
-  width: "40vw",
-  margin: "10px auto",
+  width: "100vw",
+  height: "calc(100vh - 90px)",
+  padding: "10px 25vw",
+  margin: "0 auto",
   display: "flex",
   flexDirection: "column",
   gap: 20,
   position: "relative",
+  overflow: "scroll",
+  backgroundColor: "#353535",
   "@media (max-width: 1115px)": {
-    width: "80vw",
+    padding: "10px 15vw",
   },
   "@media (max-width: 470px)": {
-    width: "95vw",
+    padding: "10px 5vw",
   },
-  overflow: "scroll",
 });
 
 export const BackButton = styled("img")({
@@ -39,6 +42,11 @@ export const BackButton = styled("img")({
 export const Button = styled(MuiButton)({
   color: "#374ebf",
   borderColor: "#374ebf",
+  "&:hover": {
+    color: "#FFF",
+    borderColor: "#374ebf",
+    backgroundColor: "#374ebf",
+  },
   "@media (max-width: 340px)": {
     fontSize: 10,
     padding: 5,
@@ -62,6 +70,7 @@ export const TaskTitle = styled(Typography)({
   fontWeight: 700,
   textTransform: "capitalize",
   cursor: "pointer",
+  color: "#FFF",
   "&:hover:after": {
     content: '" 🖊️"',
   },
@@ -79,7 +88,7 @@ export const TaskDescription = styled(Typography)({
   width: "100%",
   height: 270,
   padding: 10,
-  backgroundColor: "#F7F7F7",
+  backgroundColor: "#E7E7E7",
   overflowY: "scroll",
   cursor: "pointer",
   borderRadius: 10,
@@ -109,6 +118,7 @@ export const TaskDateItem = styled(TaskDate)({
 
 export const TagBox = styled(TaskTagsBox)({
   width: "55%",
+  padding: 2,
   gap: 10,
   "@media (max-width: 340px)": {
     width: "70%",
@@ -132,6 +142,9 @@ export const TaskState = styled(TextField)({
     color: "#374ebf",
     fontWeight: 700,
     fontSize: 18,
+  },
+  "& select": {
+    color: "#E7E7E7",
   },
   "@media (max-width: 360px)": {
     width: "100%",

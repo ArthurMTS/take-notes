@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 import { ItemDeleteButton } from "../MenuItem/MenuItem.styles";
 
 export const TaskBox = styled("div")({
-  backgroundColor: "#F7F7F7",
+  backgroundColor: "#E7E7E7",
   width: 250,
   padding: 10,
   borderRadius: 10,

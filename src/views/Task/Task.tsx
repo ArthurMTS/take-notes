@@ -104,7 +104,7 @@ export const Task: React.FC = () => {
       <TaskBox className="nobar">
         <BackButton src={ChevronIcon} onClick={onBackButtonClick} />
         <Div>
-          <TagBox className="nobar">
+          <TagBox>
             {task?.tags?.map(tag => (
               <TagItem
                 key={tag.id}

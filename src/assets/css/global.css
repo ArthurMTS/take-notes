@@ -13,3 +13,23 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* width */
+::-webkit-scrollbar {
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #353535;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #374ebf;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #213bbe;
+}

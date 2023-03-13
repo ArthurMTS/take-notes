@@ -27,6 +27,10 @@ export const HistoryBox = styled("ul")({
   padding: 15,
   overflowY: "scroll",
   position: "relative",
+  "&:first-child": {
+    paddingTop: 40,
+  },
+  paddingBottom: 40,
 });
 
 export const HistoryItem = styled("li")({
@@ -38,7 +42,7 @@ export const HistoryItem = styled("li")({
 });
 
 export const HistoryClose = styled("img")({
-  position: "absolute",
+  position: "fixed",
   right: 10,
   top: 10,
   cursor: "pointer",
@@ -56,7 +60,10 @@ export const HistoryClean = styled(Button)({
     color: "#E7E7E7",
     backgroundColor: "#e51d33",
   },
-  position: "absolute",
-  bottom: 10,
-  left: 50,
+  position: "fixed",
+  bottom: 0,
+  right: 0,
+  width: "20%",
+  backgroundColor: "#222",
+  zIndex: 10,
 });

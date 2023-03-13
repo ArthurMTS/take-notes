@@ -1,7 +1,7 @@
-import { Button, Drawer, TextField } from "@mui/material";
+import { Button as MuiButton, Drawer, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const AddTaskButton = styled(Button)({
+export const AddTaskButton = styled(MuiButton)({
   borderRadius: "50%",
   height: 64,
   borderWidth: 5,
@@ -37,6 +37,7 @@ export const TaskPopUp = styled(Drawer)({
     display: "flex",
     flexDirection: "column",
     gap: 10,
+    backgroundColor: "#222",
   },
   "@media (max-width: 1000px)": {
     "& .MuiPaper-root": {
@@ -62,6 +63,29 @@ export const TaskPopUp = styled(Drawer)({
 
 export const Input = styled(TextField)({
   width: "100%",
+  "& input": {
+    color: "#FFF",
+  },
+  "& label": {
+    color: "#374ebf",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#374ebf",
+    },
+    "&:hover fieldset": {
+      borderColor: "#374ebf",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#374ebf",
+    },
+  },
+  "& p": {
+    color: "#E7E7E7 !important",
+  },
+  "& textfield:placeholder": {
+    color: "#FFF",
+  },
 });
 
 export const DateBox = styled("div")({
@@ -74,6 +98,11 @@ export const TagsBox = styled("ul")({
   gap: 10,
   overflowX: "scroll",
   padding: 5,
+});
+
+export const TagTitle = styled(Typography)({
+  fontSize: 18,
+  color: "#FFF",
 });
 
 export const Tag = styled("li")({
@@ -89,5 +118,12 @@ export const Tag = styled("li")({
   "&:hover": {
     textDecoration: "line-through",
     backgroundColor: "#e51d33",
+  },
+});
+
+export const Button = styled(MuiButton)({
+  backgroundColor: "#374ebf",
+  "&:hover": {
+    backgroundColor: "#374ebf",
   },
 });

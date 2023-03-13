@@ -7,11 +7,12 @@ import {
   Input,
   Tag,
   TagsBox,
+  TagTitle,
   TaskPopUp,
+  Button,
 } from "./AddTask.styles";
 import PlusIcon from "@/assets/icons/plus.svg";
 import { getDate, getWeekendDate } from "@/utils/date";
-import { Button, Typography } from "@mui/material";
 import { uniqueID } from "@/utils/generateId";
 import { addTask } from "@/store/projectSlicer";
 
@@ -104,16 +105,18 @@ export const AddTask: React.FC<AddTaskProps> = ({ projectID }) => {
       </AddTaskButton>
       <TaskPopUp anchor="right" open={open} onClose={onTaskPopUpClose}>
         <Input
-          variant="filled"
+          variant="outlined"
           label="Título"
           placeholder="Ex.: Projeto de Férias..."
+          InputLabelProps={{ shrink: true }}
           value={title}
           onChange={onTitleInputChange}
         />
         <Input
-          variant="filled"
+          variant="outlined"
           label="Descrição"
           placeholder="Dê mais detalhes sobre o projeto..."
+          InputLabelProps={{ shrink: true }}
           multiline
           rows={4}
           value={description}
@@ -122,7 +125,7 @@ export const AddTask: React.FC<AddTaskProps> = ({ projectID }) => {
         <DateBox>
           <Input
             type="date"
-            variant="filled"
+            variant="outlined"
             label="Data de Início"
             InputProps={{ inputProps: { min: getDate() } }}
             InputLabelProps={{ shrink: true }}
@@ -132,7 +135,7 @@ export const AddTask: React.FC<AddTaskProps> = ({ projectID }) => {
           {projectID !== 1 ? (
             <Input
               type="date"
-              variant="filled"
+              variant="outlined"
               label="Data de Fim"
               InputProps={{
                 inputProps: {
@@ -148,7 +151,7 @@ export const AddTask: React.FC<AddTaskProps> = ({ projectID }) => {
             ""
           )}
         </DateBox>
-        <Typography sx={{ fontSize: 18 }}>Tags:</Typography>
+        <TagTitle>Tags:</TagTitle>
         <TagsBox>
           {tags.map(tag => (
             <Tag
@@ -162,14 +165,15 @@ export const AddTask: React.FC<AddTaskProps> = ({ projectID }) => {
         </TagsBox>
         <DateBox>
           <Input
-            variant="filled"
+            variant="outlined"
             label="Digita a tag desejada"
             placeholder="Ex.: Casa, Trabalho..."
             helperText="Clique na tag para remove-lá"
+            InputLabelProps={{ shrink: true }}
             value={tag}
             onChange={onTagInputChange}
           />
-          <Button variant="outlined" onClick={onAddTagButtonClick}>
+          <Button variant="contained" onClick={onAddTagButtonClick}>
             Adicionar Tag
           </Button>
         </DateBox>

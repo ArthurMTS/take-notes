@@ -5,6 +5,7 @@ export const TaskDateBox = styled("div")({
   display: "flex",
   justifyContent: "center",
   gap: 10,
+  color: "#e7e7e7",
   "& img": {
     cursor: "pointer",
   },
